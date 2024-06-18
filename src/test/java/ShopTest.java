@@ -1,23 +1,54 @@
 import cyclechronicles.Order;
 import cyclechronicles.Shop;
 import cyclechronicles.Type;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class ShopTest {
+    Order race1;
+    Order gravel1;
+    Order ebike1;
+    Order fixie1;
+    Order race2;
+    Order race3;
+    Order race4;
+    Order race5;
+    Order race6;
+
+    @BeforeEach
+    void setUp() {
+        race1 = mock(Order.class);
+        gravel1 = mock(Order.class);
+        ebike1 = mock(Order.class);
+        fixie1 = mock(Order.class);
+        race2 = mock(Order.class);
+        race3 = mock(Order.class);
+        race4 = mock(Order.class);
+        race5 = mock(Order.class);
+        race6 = mock(Order.class);}
+
+
+
+
     //gÄK1
     @Test
     void testAcceptTrue(){
         Shop shop = new Shop();
-        Order race1 = new Order("Customer1", Type.RACE);
+        when(race1.getCustomer()).thenReturn("Customer1");
+        when(race1.getBicycleType()).thenReturn(Type.RACE);
         assertTrue(shop.accept(race1));
     }
     //uÄK1
     @Test
     void testAcceptFalseTypeGravel(){
         Shop shop = new Shop();
-        Order gravel1 = new Order("Customer1", Type.GRAVEL);
+        when(gravel1.getCustomer()).thenReturn("Customer1");
+        when(gravel1.getBicycleType()).thenReturn(Type.GRAVEL);
         assertFalse(shop.accept(gravel1));
 
     }
@@ -25,15 +56,18 @@ public class ShopTest {
     @Test
     void testAcceptFalseTypeEbike(){
         Shop shop = new Shop();
-        Order ebike1 = new Order("Customer1", Type.EBIKE);
+        when(ebike1.getCustomer()).thenReturn("Customer1");
+        when(ebike1.getBicycleType()).thenReturn(Type.EBIKE);
         assertFalse(shop.accept(ebike1));
     }
     //uÄK3
     @Test
     void testAcceptFalsePendingOrderCustomer(){
         Shop shop = new Shop();
-        Order race1 = new Order("Customer1", Type.RACE);
-        Order fixie1 = new Order("Customer1", Type.FIXIE);
+        when(race1.getCustomer()).thenReturn("Customer1");
+        when(race1.getBicycleType()).thenReturn(Type.RACE);
+        when(fixie1.getCustomer()).thenReturn("Customer1");
+        when(fixie1.getBicycleType()).thenReturn(Type.FIXIE);
         shop.accept(fixie1);
         assertFalse(shop.accept(race1));
     }
@@ -42,17 +76,24 @@ public class ShopTest {
     void testAcceptFalsePendingOrderSize(){
         Shop shop = new Shop();
         //Customer 1
-        Order race1 = new Order("Customer1", Type.RACE);
+        when(race1.getCustomer()).thenReturn("Customer1");
+        when(race1.getBicycleType()).thenReturn(Type.RACE);
         //Customer 2
-        Order race2 = new Order("Customer2", Type.RACE);
+        when(race2.getCustomer()).thenReturn("Customer2");
+        when(race2.getBicycleType()).thenReturn(Type.RACE);
         //Customer 3
-        Order race3 = new Order("Customer3", Type.RACE);
+        when(race3.getCustomer()).thenReturn("Customer3");
+        when(race3.getBicycleType()).thenReturn(Type.RACE);
         //Customer 4
-        Order race4 = new Order("Customer4", Type.RACE);
+        when(race4.getCustomer()).thenReturn("Customer4");
+        when(race4.getBicycleType()).thenReturn(Type.RACE);
         //Customer 5
-        Order race5 = new Order("Customer5", Type.RACE);
+        when(race5.getCustomer()).thenReturn("Customer5");
+        when(race5.getBicycleType()).thenReturn(Type.RACE);
         //Customer 6
-        Order race6 = new Order("Customer6", Type.RACE);
+        when(race6.getCustomer()).thenReturn("Customer6");
+        when(race6.getBicycleType()).thenReturn(Type.RACE);
+
         shop.accept(race1);
         shop.accept(race2);
         shop.accept(race3);
